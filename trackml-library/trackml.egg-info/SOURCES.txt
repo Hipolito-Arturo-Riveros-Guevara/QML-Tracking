@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+trackml/__init__.py
+trackml/dataset.py
+trackml/randomize.py
+trackml/score.py
+trackml/utils.py
+trackml/weights.py
+trackml.egg-info/PKG-INFO
+trackml.egg-info/SOURCES.txt
+trackml.egg-info/dependency_links.txt
+trackml.egg-info/requires.txt
+trackml.egg-info/top_level.txt
