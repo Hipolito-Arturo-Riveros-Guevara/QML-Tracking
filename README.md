@@ -58,9 +58,9 @@ Bajo estas condiciones, una partícula cargada sigue una **trayectoria helicoida
 
 Por eso, cada hit $(x,y,z)$ se convierte a:
 
-\[
+$
 (r,\phi,z)
-\]
+$
 
 y el preprocesamiento usa observables geométricos que “capturan” la física esperada de una trayectoria.
 
@@ -85,9 +85,9 @@ Estos cortes eliminan gran parte de los pares no físicos.
 #### 5.2 Tripletes
 Un **triplete** se construye enlazando dobletes con un hit compartido:
 
-\[
+$
 (h_1,h_2) \;\text{y}\; (h_2,h_3) \Rightarrow (h_1,h_2,h_3)
-\]
+$
 
 Luego se aplican criterios adicionales:
 
@@ -106,9 +106,9 @@ Esto genera un conjunto de tripletes:
 
 Un triplete tiene 9 variables geométricas:
 
-\[
+$
 (r_1,\phi_1,z_1,\; r_2,\phi_2,z_2,\; r_3,\phi_3,z_3)\in\mathbb{R}^9
-\]
+$
 
 Muchas de estas variables están correlacionadas (por la estructura helicoidal).  
 Por ello se explora **PCA**:
@@ -158,9 +158,9 @@ Una vez entrenada la QNN de 1 qubit:
 
 El quantum kernel se define como:
 
-\[
+$
 k(x,x') = \left|\langle 0|S(x)^\dagger S(x')|0\rangle\right|^2
-\]
+$
 
 Esto produce una **matriz kernel** $K_{ij}=k(x_i,x_j)$ que se usa para entrenar un **SVM** con kernel precomputado.
 
