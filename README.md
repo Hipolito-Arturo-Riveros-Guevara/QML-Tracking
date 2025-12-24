@@ -40,7 +40,7 @@ Esto es importante porque:
 
 Formalmente:
 
-- Un **triplete** = 3 hits en capas consecutivas: \((h_1,h_2,h_3)\)
+- Un **triplete** = 3 hits en capas consecutivas: $(h_1,h_2,h_3)$
 - Etiqueta positiva (**1**) si los tres hits comparten el mismo `particle_id`
 - Etiqueta negativa (**0**) si combinan hits de partículas distintas
 
@@ -53,10 +53,10 @@ Así, el tracking local se convierte en un **problema de clasificación binaria 
 El tracker está inmerso en un campo magnético alineado con el eje del haz.  
 Bajo estas condiciones, una partícula cargada sigue una **trayectoria helicoidal**:
 
-- En el plano transversal \(x\text{--}y\): curva (aprox. arco de circunferencia)
-- En el plano \(r\text{--}z\): casi recta, con \(r=\sqrt{x^2+y^2}\)
+- En el plano transversal $x\text{--}y$: curva (aprox. arco de circunferencia)
+- En el plano $r\text{--}z$: casi recta, con $r=\sqrt{x^2+y^2}$
 
-Por eso, cada hit \((x,y,z)\) se convierte a:
+Por eso, cada hit $(x,y,z)$ se convierte a:
 
 \[
 (r,\phi,z)
@@ -72,13 +72,13 @@ y el preprocesamiento usa observables geométricos que “capturan” la física
 Se forman **dobletes**: pares de hits en capas adyacentes.  
 Luego se filtran usando dos observables:
 
-- **Intercepto \(z_0\)** (extrapolación en \(r\text{--}z\)): aproxima el origen longitudinal
-- **Curvatura aparente \(\Delta\phi/\Delta r\)**: captura variación azimutal por radio
+- **Intercepto $z_0$** (extrapolación en $r\text{--}z$): aproxima el origen longitudinal
+- **Curvatura aparente $\Delta\phi/\Delta r$**: captura variación azimutal por radio
 
 Cortes típicos usados:
 
-- \(|z_0|\le 100\ \text{mm}\)
-- \(|\Delta\phi/\Delta r|\le 6\times10^4\ \text{rad/mm}\)
+- $|z_0|\le 100\ \text{mm}$
+- $|\Delta\phi/\Delta r|\le 6\times10^4\ \text{rad/mm}$
 
 Estos cortes eliminan gran parte de los pares no físicos.
 
@@ -91,9 +91,9 @@ Un **triplete** se construye enlazando dobletes con un hit compartido:
 
 Luego se aplican criterios adicionales:
 
-- **\(\theta\)-breaking angle**: suavidad en \(r\text{--}z\)
-- **\(\phi\)-breaking angle**: suavidad en \(r\text{--}\phi\)
-- **estimación de \(p_T\)**: evita curvaturas compatibles con \(p_T\) demasiado bajo
+- **$\theta$-breaking angle**: suavidad en $r\text{--}z$
+- **$\phi$-breaking angle**: suavidad en $r\text{--}\phi$
+- **estimación de $p_T$**: evita curvaturas compatibles con $p_T$ demasiado bajo
 
 Esto genera un conjunto de tripletes:
 - mucho más pequeño que el espacio combinatorio original
@@ -138,13 +138,13 @@ El núcleo del trabajo es construir un modelo **Neural Quantum Kernel (NQK)**, q
 
 Se utiliza una arquitectura de QNN (1 qubit) en capas. En cada capa:
 
-- se “carga” el dato (rotaciones con \(x\))
-- se aplican rotaciones entrenables (\(\theta\))
+- se “carga” el dato (rotaciones con $x$)
+- se aplican rotaciones entrenables ($\theta$)
 
 Esto permite alta expresividad incluso con 1 qubit, gracias a la repetición de la codificación de datos (*re-uploading*).  
 El entrenamiento se realiza minimizando un costo basado en **fidelidad** con estados etiqueta.
 
-Resultado: parámetros óptimos \(\theta^\*\) aprendidos del dataset.
+Resultado: parámetros óptimos $\theta^\*$ aprendidos del dataset.
 
 ---
 
@@ -154,7 +154,7 @@ Una vez entrenada la QNN de 1 qubit:
 
 - se replica en 3 qubits
 - se agregan compuertas de entrelazamiento (CNOTs)
-- se define un embedding \(S_{\theta^\*}(x)\)
+- se define un embedding $S_{\theta^\*}(x)$
 
 El quantum kernel se define como:
 
@@ -162,7 +162,7 @@ El quantum kernel se define como:
 k(x,x') = \left|\langle 0|S(x)^\dagger S(x')|0\rangle\right|^2
 \]
 
-Esto produce una **matriz kernel** \(K_{ij}=k(x_i,x_j)\) que se usa para entrenar un **SVM** con kernel precomputado.
+Esto produce una **matriz kernel** $K_{ij}=k(x_i,x_j)$ que se usa para entrenar un **SVM** con kernel precomputado.
 
 ---
 
@@ -182,7 +182,7 @@ Se comparan tres entradas:
 
 Además, purity/efficiency se estudian como función de:
 - longitud del track
-- \(\theta\)-breaking angle (suavidad del segmento)
+- $\theta$-breaking angle (suavidad del segmento)
 
 Confirmando que segmentos más suaves se clasifican con mayor estabilidad.
 
