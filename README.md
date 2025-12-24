@@ -14,7 +14,7 @@ Este repositorio contiene la implementación completa de mi proyecto de tesis:
 
 
 
----<img width="1115" height="567" alt="grafico" src="https://github.com/user-attachments/assets/d5561208-83a6-4683-be2e-9b429f6ed646" />
+<img width="1115" height="567" alt="grafico" src="https://github.com/user-attachments/assets/d5561208-83a6-4683-be2e-9b429f6ed646" />
 
 
 ## 🧠 1) ¿Qué es un Neural Quantum Kernel (NQK)?
