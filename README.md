@@ -1,4 +1,41 @@
-### 1) Particle Trackin con Neural Quantum Kernels
+## ✨ Descripción general
+
+La reconstrucción de trayectorias de partículas (**particle tracking**) es una de las tareas fundamentales en los experimentos de Física de Altas Energías (HEP). En detectores modernos (por ejemplo, **ATLAS** y **CMS**) que operan bajo condiciones de **alto pile-up** (HL-LHC), el número de impactos (*hits*) registrados por evento es enorme, lo que convierte la asociación entre hits en un problema **altamente combinatorio**.
+
+Este repositorio contiene la implementación completa de mi proyecto de tesis:
+
+- ✅ **Preprocesamiento de hits de TrackML → construcción de segmentos físicamente plausibles (tripletes)**
+- ✅ Reformulación del tracking como un problema de **clasificación binaria de tripletes** (verdaderos vs. falsos)
+- ✅ Entrenamiento de **Redes Neuronales Cuánticas (QNN)** y construcción de **Neural Quantum Kernels (NQK)**
+- ✅ Uso de **kernels cuánticos + SVM** para la clasificación
+- ✅ Evaluación del desempeño mediante **Accuracy**, **Purity** y **Efficiency**
+- ✅ Exploración de **PCA** para reducir la dimensionalidad de entrada y la profundidad de los circuitos cuánticos
+
+
+
+
+---<img width="1115" height="567" alt="grafico" src="https://github.com/user-attachments/assets/d5561208-83a6-4683-be2e-9b429f6ed646" />
+
+
+## 🧠 1) ¿Qué es un Neural Quantum Kernel (NQK)?
+
+Un **Neural Quantum Kernel** combina dos ideas ampliamente utilizadas en *Quantum Machine Learning*:
+
+- **QNNs (Quantum Neural Networks):** circuitos cuánticos parametrizados entrenados con datos
+- **Kernels cuánticos explícitos (EQK):** kernels definidos a partir del solapamiento (fidelidad) entre estados cuánticos
+
+**Idea clave:** entrenar primero una QNN pequeña y reutilizar los parámetros aprendidos para definir un **kernel cuántico informado por la tarea**.
+
+En este repositorio nos centramos en la configuración **1-to-3 NQK**:
+
+1. Entrenar una **QNN de 1 qubit** (con *data re-uploading*) → obtener los parámetros óptimos **θ\***
+2. Construir un **circuito de embedding** sobre **3 qubits**, replicando el circuito entrenado y añadiendo compuertas de entrelazamiento
+3. Calcular la **matriz kernel** **K**
+4. Entrenar un **SVM** utilizando **kernels precomputados**
+
+
+
+### 2) Particle Tracking
 
 En un experimento de Física de Altas Energías (HEP), una colisión protón–protón produce decenas o cientos de partículas. Al atravesar el detector, las partículas cargadas dejan “marcas” en el sistema de seguimiento (tracker), llamadas **hits**. El problema del **particle tracking** consiste en:
 
@@ -11,21 +48,6 @@ Esto se complica por tres razones:
 3. **Combinatoria explosiva**: el número de combinaciones posibles de hits crece rápidamente (e.g., elegir 3 hits de miles ya es enorme).
 
 Por eso, el tracking es uno de los componentes más costosos del pipeline de reconstrucción.
-
----
-
-### 2) TrackML Challenge
-
-El dataset del **TrackML Particle Tracking Challenge** fue creado para reproducir de forma realista el tracking en un detector inspirado en **ATLAS/CMS**:
-
-- múltiples capas cilíndricas (barrel) y discos (endcaps)
-- campo magnético uniforme (aprox.)
-- eventos generados con **Pythia 8**
-- propagación/simulación rápida con **ACTS**
-
-TrackML incluye *truth labels* (ground truth): cada hit está asociado a un `particle_id`, lo cual permite construir datasets supervisados.
-
----
 
 ### 3) Formulación del problema
 
